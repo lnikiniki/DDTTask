@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<email>
+    <correct>str.katherine.l@gmail.com</correct>
+    <correct>str.katherine.l@gmail.com</correct>
+    <correct>str.katherine.l@gmail.com</correct>
+    <correct>str.katherine.l@gmail.com</correct>
+    <correct>str.katherine.l@gmail.com</correct>
+    <incorrect>incorrectEmail</incorrect>
+    <incorrect>incorrectEmail</incorrect>
+    <incorrect>incorrectEmail</incorrect>
+    <incorrect>incorrectEmail</incorrect>
+    <incorrect>incorrectEmail</incorrect>
+    <subject>TestSubject1</subject>
+    <subject>TestSubject2</subject>
+    <subject>TestSubject3</subject>
+    <subject>TestSubject4</subject>
+    <subject>TestSubject5</subject>
+    <text>TestText1</text>
+    <text>TestText2</text>
+    <text>TestText3</text>
+    <text>TestText4</text>
+    <text>TestText5</text>
+</email>
