@@ -4,6 +4,7 @@
     <test name="Test">
         <classes>
             <class name="com.epam.lab.gmailTaskDDT.GmailTest"/>
+            <class name="com.epam.lab.gmailTaskDDT.FailedTest"/>
         </classes>
     </test>
 </suite>

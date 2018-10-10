@@ -3,18 +3,20 @@ package com.epam.lab.gmailTaskDDT;
 import com.epam.lab.gmailTaskDDT.businessObjects.GmailMainBO;
 import com.epam.lab.gmailTaskDDT.businessObjects.GmailSignInBO;
 import com.epam.lab.gmailTaskDDT.drivers.DriverPool;
-import com.epam.lab.gmailTaskDDT.utils.*;
+import com.epam.lab.gmailTaskDDT.utils.PropertyParser;
+import com.epam.lab.gmailTaskDDT.utils.XMLParser;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.util.Iterator;
 
-@Listeners(TestListener.class)
-public class GmailTest {
-    private static final Logger LOG = Logger.getLogger(GmailTest.class);
+public class FailedTest {
+    private static final Logger LOG = Logger.getLogger(FailedTest.class);
     private String correctEmail;
-    private String incorrectEmail;
     private String emailSubject;
     private String emailText;
 
@@ -23,7 +25,6 @@ public class GmailTest {
         System.setProperty("webdriver.chrome.driver", new PropertyParser("src/main/resources/driver.properties").getDriverPath());
         XMLParser emailDataParser = new XMLParser("src/test/resources/email.xml");
         correctEmail = emailDataParser.getName("correct");
-        incorrectEmail = emailDataParser.getName("incorrect");
         emailSubject = emailDataParser.getName("subject");
         emailText = emailDataParser.getName("text");
     }
@@ -34,12 +35,8 @@ public class GmailTest {
         GmailSignInBO signIn = new GmailSignInBO(DriverPool.getDriver());
         signIn.signIn(email, password);
         GmailMainBO main = new GmailMainBO(DriverPool.getDriver());
-        main.composeEmail(incorrectEmail, emailSubject, emailText);
+        main.composeEmail(correctEmail, emailSubject, emailText);
         Assert.assertTrue(main.alertIsDisplayed());
-        main.submitAlert();
-        main.changeEmail(correctEmail);
-        Assert.assertTrue(main.notificationIsDisplayed());
-        main.waitNotificationToDisappear();
         LOG.info("Ending test");
     }
 
@@ -51,15 +48,5 @@ public class GmailTest {
     @DataProvider(name = "SignInXML", parallel = true)
     public static Iterator<Object[]> signInXML(){
         return XMLParser.getSignInData().iterator();
-    }
-
-    @DataProvider(name = "SignInCSV", parallel = true)
-    public static Iterator<Object[]> signInCSV(){
-        return new CSVParser().getSignIndata().iterator();
-    }
-
-    @DataProvider(name = "SignInXSLX", parallel = true)
-    public static Iterator<Object[]> signInXLSX(){
-        return XLSXParser.getSignInData().iterator();
     }
 }
